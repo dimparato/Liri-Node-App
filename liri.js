@@ -63,7 +63,7 @@ function searchToggle() {
 }
 
 function searchMovie(movie) {
-    if(typeof movie === "undefined") {
+    if(!movie) {
         movie = "Mr. Nobody";
     }
     axios.get("http://www.omdbapi.com/?apikey=trilogy&t=" + movie)
@@ -79,7 +79,7 @@ function searchMovie(movie) {
 }
 
 function searchSong(song) {
-    if(typeof song === "undefined") {
+    if(!song) {
         song = "The Sign, Ace of Base";
     }
     spotify.search({type: "track", query: song})
@@ -95,7 +95,7 @@ function searchSong(song) {
 }
 
 function searchConcert(concert) {
-    if(typeof concert === "undefined") {
+    if(!concert) {
         concert = "Gallagher";
     }
     axios.get("https://rest.bandsintown.com/artists/" + concert + "/events?app_id=codingbootcamp")
