@@ -68,9 +68,9 @@ function searchMovie(movie) {
     }
     axios.get("http://www.omdbapi.com/?apikey=trilogy&t=" + movie)
         .then(function(response) {
-            var movieData = "\n" + response.data.Title + "\n" + response.data.Year + "\nIMDB: " + response.data.Ratings[0].Value + "\nRotten Tomatoes: " + response.data.Ratings[1].Value + "\n" + response.data.Country + "\n" + response.data.Language + "\nPlot: " + response.data.Plot + "\nCast: " + response.data.Actors + "\n";
+            var movieData = "\n" + response.data.Title + "\n" + response.data.Year + "\nIMDB: " + response.data.Ratings[0].Value + "\nRotten Tomatoes: " + response.data.Ratings[1].Value + "\nLocations: " + response.data.Country + "\nLanguages: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nCast: " + response.data.Actors;
             console.log(movieData);
-            fs.appendFile("log.txt", movieData, (error) => {
+            fs.appendFile("log.txt", "\n" + moment().format("dddd, MMMM Do YYYY, h:mm:ss a") + "\n" + movieData + "\n", (error) => {
                 if (error) throw error;
             });
         }).catch(function(error) {
@@ -84,9 +84,9 @@ function searchSong(song) {
     }
     spotify.search({type: "track", query: song})
         .then(function(response) {
-            var songData = "\nArtist: " + response.tracks.items[0].artists[0].name + "\nTrack: " + response.tracks.items[0].name + "\nPreview: " + response.tracks.items[0].preview_url + "\nAlbum: " + response.tracks.items[0].album.name + "\n";
+            var songData = "\nArtist: " + response.tracks.items[0].artists[0].name + "\nTrack: " + response.tracks.items[0].name + "\nPreview: " + response.tracks.items[0].preview_url + "\nAlbum: " + response.tracks.items[0].album.name;
             console.log(songData);
-            fs.appendFile("log.txt", songData, (error) => {
+            fs.appendFile("log.txt", "\n" + moment().format("dddd, MMMM Do YYYY, h:mm:ss a") + "\n" + songData + "\n", (error) => {
                 if (error) throw error;
             });
         }).catch(function(error) {
@@ -101,14 +101,17 @@ function searchConcert(concert) {
     axios.get("https://rest.bandsintown.com/artists/" + concert + "/events?app_id=codingbootcamp")
         .then(function(response) {
             var concertData;
-            console.log("\nSee " + concert + " on stage at...\n");
-            fs.appendFile("log.txt", "\nSee " + concert + " on stage at...\n", (error) => {
+            fs.appendFile("log.txt", "\n" + moment().format("dddd, MMMM Do YYYY, h:mm:ss a") + "\n", (error) => {
                 if (error) throw error;
             });
+            fs.appendFile("log.txt", "\nSee " + concert + " on stage at...\n\n", (error) => {
+                if (error) throw error;
+            });
+            console.log("\nSee " + concert + " on stage at...\n");
             for (let i = 0; i < response.data.length; i++) {
-                concertData = response.data[i].venue.name + ", " + response.data[i].venue.city + ", " + response.data[i].venue.country + ", " + moment(response.data[i].datetime).format("MM/DD/YYYY") + "\n";
+                concertData = response.data[i].venue.name + ", " + response.data[i].venue.city + ", " + response.data[i].venue.country + ", " + moment(response.data[i].datetime).format("MM/DD/YYYY");
                 console.log(concertData);
-                fs.appendFile("log.txt", concertData, (error) => {
+                fs.appendFile("log.txt", concertData + "\n", (error) => {
                     if (error) throw error;
                 });
             }
