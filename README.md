@@ -4,6 +4,9 @@ Liri is a command-line app designed for Node that can enable users to find infor
 about movies, music tracks, and upcoming concerts. Liri takes the following commands:
 
 # "movie-this" [movie title]
+
+![movie-this](https://github.com/dimparato/Liri-Node-App/blob/master/screenshots/liri01.png)
+
 # "concert-this" [artist/band name]
 # "spotify-this-song" [song]
 # "do-what-it-says" (reads information from a file named "ramdom.txt"*)
